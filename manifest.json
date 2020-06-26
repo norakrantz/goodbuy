@@ -9,10 +9,11 @@
             "js": ["content.js"]
         }
     ],
-      "background": {
-          "scripts": ["background.js"]
-      },
-      "browser_action": {
-          "default_icon": "hello_extensions.png"
-      }
+    "background": {
+        "scripts": ["background.js"]
+    },
+    "page_action": {
+        "default_icon": "hello_extensions.png",
+        "default_popup": "popup.html"
+    }
   }
