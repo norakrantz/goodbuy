@@ -1,4 +1,4 @@
-const tags = {
+export const tags = {
     1: "womenOwned",
     2: "blackOwned",
     3: "fairTrade",
@@ -6,3 +6,5 @@ const tags = {
     5: "charitable",
     6: "smallBusiness"
 }
+
+module.exports = tags
