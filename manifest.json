@@ -3,6 +3,11 @@
     "description" : "Amazon Redirecting Extension",
     "version": "1.0",
     "manifest_version": 2,
+    "browser_action": {
+        "default_icon": "tempIcon.png",
+        "default_popup": "popup.html",
+        "default_title": "GoodBuy - click me!"
+    },
     "content_scripts": [
         {
             "matches": ["*://*.amazon.com/*"],
@@ -10,10 +15,12 @@
         }
     ],
     "background": {
-        "scripts": ["background.js"]
+        "scripts": ["background.js"],
+        "persistent": false
     },
-    "page_action": {
-        "default_icon": "hello_extensions.png",
-        "default_popup": "popup.html"
-    }
+    "permissions": [
+        "tabs",
+        "storage",
+        "notifications"
+    ]
   }
