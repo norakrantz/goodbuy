@@ -1,35 +1,100 @@
-//CONTENT.JS
-//find product name/store name, look for matches, if (match) show badge until pageAction click and send match obj/objs to popup.js
-import products from './data/products'
-import stores from './data/stores'
+const  products = [{
+    id: 1,
+    name: 'lemon verbena multi-surface everyday cleaner',
+    description: 'everyday cleaner',
+    price: 399,
+    imageUrl: 'https://cdn11.bigcommerce.com/s-lxgmmudw7i/images/stencil/1280x1280/products/724/971/mrs_meyers_lemon_verbena_multi_surface_everyday_cleaner__94829.1580380131.png?c=2&imbypass=on',
+    productUrl: 'https://www.mrsmeyers.com/product/household-cleaners/multi-surface-glass-cleaners/multi-surface-cleaner-lemon-verbena/',
+    store: 2
+},
+{
+    id: 2,
+    name: 'all purpose spray – peppermint & lemon',
+    description: 'all purpose spray',
+    price: 579,
+    imageUrl: 'https://www.rebelgreen.com/wp-content/uploads/2019/09/Square-AllPurposeSprayYELLOW_Biz.jpg',
+    productUrl: 'https://www.rebelgreen.com/product/all-purpose-spray-peppermint-lemon/',
+    store: 1
+},
+{
+    id: 3,
+    name: 'ProdName',
+    price: 0,
+    imageUrl: '',
+    productUrl: '',
+    store: 0
+}]
+
+const stores = [{
+    id: 1,
+    name: 'rebelgreen',
+    url: 'https://www.rebelgreen.com',
+    tags: [1, 4]
+},
+{
+    id: 2,
+    name: "mrs. meyer's",
+    url: 'https://www.mrsmeyers.com/',
+    tags: [4]
+},
+{
+    id: 3,
+    name: 'store',
+    url: '',
+    tags: []
+}]
+
 
 const badProduct = document.getElementById('productTitle')
 const badStore = document.getElementById('bylineInfo')
+
+console.log('badProduct: ', badProduct.innerText.toLowerCase())
+console.log('badStore: ', badStore.innerText.toLowerCase())
+
 const results = {
     goodProducts: [],
     goodStores: []
 }
 
-const findProdMatches = (product) => {
+const findProdMatches = (productName) => {
     for (let i = 0; i < products.length; i++) {
-        if (product.innerText.includes(products[i].name)) results.goodProducts.push(products[i])
+        if (productName.toLowerCase().includes(products[i].description)) {
+            console.log('found a product match: ', products[i].name)
+            results.goodProducts.push(products[i])
+        }
     }
 }
 
-const findStoreMatches = (store) => {
+const findStoreMatches = (storeName) => {
     for (let i = 0; i < stores.length; i++) {
-        if (stores[i].name.includes(store.innerText) || store.innerText.includes(stores[i].name)) results.goodStores.push(stores[i])
+        if (stores[i].name.includes(storeName.toLowerCase()) || storeName.toLowerCase().includes(stores[i].name)) {
+            console.log('found a store match: ', stores[i].name)
+            results.goodStores.push(stores[i])
+        }
     }
 }
+
+
+if (badProduct) {
+    console.log('looking...')
+    findProdMatches(badProduct.innerText)
+    findStoreMatches(badStore.innerText)
+}
+
+if (results.goodProducts.length || results.goodStores.length) {
+    console.log('sending data to background.js')
+    chrome.runtime.sendMessage(results)
+}
+
+
+
+
+
+
 
 // window.onload = function() {
 //     console.log('page loaded')
 // }
-
-if (badProduct) {
-    findProdMatches(badProduct)
-    findStoreMatches(badStore)
-}
 
 // chrome.tabs.query({
 //     active: true,
@@ -41,16 +106,6 @@ if (badProduct) {
 //       });
 //     });
 
-
-
-
-
-
-
-// const singlePageView = document.getElementsByClassName('dp')
-
-//ac-badge-wrapper and badge-wrapper
-
 // const banner = document.createElement('div')
 // const badgeWrapper = document.querySelector('.badge-wrapper')
 // badgeWrapper.appendChild(banner)
@@ -59,15 +114,3 @@ if (badProduct) {
 // console.log(banner)
 // const text = document.createElement('p')
 // banner.appendChild(text)
-
-// const bestsellerImages  = document.getElementsByClassName('p13n-sc-dynamic-image')
-
-// for (let i = 0; i < bestsellerImages.length; i++) {
-//     if (bestsellerImages[i].alt.length > 1) console.log('bestseller', i, bestsellerImages[i].alt)
-// }
-
-// const searchImages = document.getElementsByClassName('s-image')
-
-// for (let i = 0; i < searchImages.length; i++) {
-//     if (searchImages[i].alt.length > 1) console.log('search', i, searchImages[i].alt)
-// }

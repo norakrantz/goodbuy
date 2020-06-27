@@ -1,0 +1,9 @@
+body  {
+    background-color: powderblue;
+    border: royalblue 5px solid;
+}
+
+#general {
+    background-color: seagreen;
+    display: "none"
+}
