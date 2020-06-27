@@ -7,17 +7,39 @@ const tags = {
     6: "smallBusiness"
 }
 
+let matches
+
 document.addEventListener('DOMContentLoaded', function () {
-    // chrome.runtime.getBackgroundPage(function(window) {
-    //     console.log(window.data)
-    // })
+
     chrome.storage.local.get(function(res) {
-        console.log('access local storage in popup', res)
+
+        chrome.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function(tabs) {
+            chrome.browserAction.setBadgeText({
+                'text': '', 
+                'tabId': tabs[0].id
+            })
+            chrome.browserAction.setBadgeBackgroundColor({
+                'color': [0, 0, 0, 0],
+                'tabId': tabs[0].id
+            })
+        })
+
+        const {goodProducts, goodStores} = res
+
+        document.getElementById('prodName').innerText = `better buy: ${goodProducts[0].name}`
+        // document.getElementById('prodImage').src = goodProducts[0].imageUrl
     })
+
 })
 
+
+
+
+
 //getBackgroundPage from background.js window to determine when to set badge
-// chrome.browserAction.setBadgeText
 
 // const pic = document.getElementById("general")
 // console.log(pic)

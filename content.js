@@ -96,15 +96,6 @@ if (results.goodProducts.length || results.goodStores.length) {
 //     console.log('page loaded')
 // }
 
-// chrome.tabs.query({
-//     active: true,
-//     currentWindow: true
-//   }, function(tabs) {
-//       chrome.tabs.onCreated.addListener((tabs[0].id) {
-//       subs: JSON.stringify(subs),
-//       action: ‘store’
-//       });
-//     });
 
 // const banner = document.createElement('div')
 // const badgeWrapper = document.querySelector('.badge-wrapper')
