@@ -8,8 +8,11 @@ const tags = {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    chrome.runtime.getBackgroundPage(function(window) {
-        console.log(window.data)
+    // chrome.runtime.getBackgroundPage(function(window) {
+    //     console.log(window.data)
+    // })
+    chrome.storage.local.get(function(res) {
+        console.log('access local storage in popup', res)
     })
 })
 
