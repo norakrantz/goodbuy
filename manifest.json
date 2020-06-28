@@ -1,12 +1,12 @@
 {
-    "name": "Stackathon",
+    "name": "goodbuy",
     "description" : "Amazon Redirecting Extension",
     "version": "1.0",
     "manifest_version": 2,
     "browser_action": {
         "default_icon": "tempIcon.png",
         "default_popup": "popup.html",
-        "default_title": "GoodBuy - click me!"
+        "default_title": "goodbuy - click me!"
     },
     "content_scripts": [
         {
